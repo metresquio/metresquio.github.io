@@ -1,0 +1,109 @@
+body {
+  font-family: 'Inter', sans-serif;
+  color: #333;
+}
+
+.bg-darkgreen {
+  background-color: #3b5d50 !important;
+}
+
+.btn-darkgreen {
+  background-color: #3b5d50;
+  color: #fff;
+  border: none;
+}
+
+.btn-darkgreen:hover {
+  background-color: #2e4b41;
+}
+
+.hero-section {
+  background-color: #3b5d50;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-text {
+  z-index: 2;
+  position: relative;
+  color: #fff;
+  max-width: 500px;
+}
+
+.hero-bg-shape {
+  position: absolute;
+  right: -100px;
+  top: 0;
+  width: 55%;
+  height: 100%;
+  background-color: #2e4b41;
+  border-bottom-left-radius: 150px;
+  z-index: 0;
+}
+
+.hero-image {
+  z-index: 2;
+  position: relative;
+}
+
+.hero-text h1 {
+  font-size: 2.8rem;
+}
+
+.hero-text p {
+  font-size: 1.1rem;
+  max-width: 450px;
+}
+
+footer ul li a:hover {
+  color: #f9be29;
+}
+
+body {
+  color: #2f2f2f;
+}
+
+.btn-dark {
+  background-color: #3b5d50;
+  border: none;
+}
+
+.btn-dark:hover {
+  background-color: #f9be29;
+  color: #2f2f2f;
+}
+
+.card img {
+  transition: transform 0.3s ease;
+}
+
+.card img:hover {
+  transform: scale(1.05);
+}
+
+.newsletter-section {
+  background-color: #f3f6f4;
+}
+
+.btn-custom {
+  background-color: #3b5d50;
+  color: white;
+  border: none;
+}
+
+.btn-custom:hover {
+  background-color: #f9be29;
+  color: #2f2f2f;
+  transition: 0.3s ease;
+}
+
+.form-control {
+  border: 1px solid #ced4da;
+  box-shadow: none;
+}
+
+.form-control:focus {
+  border-color: #3b5d50;
+  box-shadow: 0 0 0 0.1rem rgba(59, 93, 80, 0.25);
+}
