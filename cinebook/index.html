@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>CineBook — Cinema Ticket Booking</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="main.css" />
+</head>
+<body>
+
+<!-- ══ OPEN WEBSITE BANNER ══ -->
+<div class="open-website-banner">
+  <a href="http://cinemabookings.atwebpages.com/" target="_blank" rel="noopener" class="open-website-btn">
+    <span class="open-website-icon">🎬</span>
+    Open Website
+    <span class="open-website-arrow">↗</span>
+  </a>
+</div>
+
+<!-- CONTACT BAR -->
+<div class="contact-bar">
+  <span>For cancellations, contact admin:</span>
+  <a href="mailto:Cinebook@gmail.com">Cinebook@gmail.com</a>
+  <span>|</span>
+  <a href="tel:09051234567">0905 123 4567</a>
+</div>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="site-logo">&#127916; <span>Cine</span>Book</div>
+  <nav class="header-nav">
+    <span id="header-user-label" class="header-user-label"></span>
+    <button class="btn-nav" id="btn-nav-home">Home</button>
+    <button class="btn-nav" id="btn-nav-customer">Customer</button>
+    <button class="btn-nav" id="btn-nav-admin">Admin</button>
+    <button class="btn-nav" id="btn-logout" style="display:none">Logout</button>
+  </nav>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<!-- Mobile nav drawer -->
+<nav class="mobile-nav" id="mobile-nav">
+  <span id="mobile-user-label" style="font-size:0.85rem;color:rgba(255,255,255,0.6);padding:4px 0;display:none"></span>
+  <button class="btn-nav" id="mobile-btn-home">Home</button>
+  <button class="btn-nav" id="mobile-btn-customer">Customer</button>
+  <button class="btn-nav" id="mobile-btn-admin">Admin</button>
+  <button class="btn-nav" id="mobile-btn-logout" style="display:none">Logout</button>
+</nav>
+
+<!-- ══ PAGE: HOME ══ -->
+<div id="page-home" class="page active">
+  <div class="hero">
+    <h1>Your Seat.<br><span>Your Movie.</span></h1>
+    <p>Book cinema tickets in seconds — pick your show, choose your seat, pay and go.</p>
+    <div class="hero-btns">
+      <button class="btn-hero-primary" id="btn-hero-book">Book Tickets Now</button>
+      <button class="btn-hero-secondary" id="btn-hero-mybookings">My Bookings</button>
+    </div>
+  </div>
+  <div class="container">
+    <div class="section-title">Now Showing</div>
+    <div class="section-sub">Currently available movies at CineBook.</div>
+    <div id="home-movies" class="movie-grid"><div class="text-muted">Loading movies…</div></div>
+  </div>
+</div>
+
+<!-- ══ PAGE: AUTH ══ -->
+<div id="page-auth" class="page">
+  <div class="container" style="max-width:460px;">
+    <div class="card">
+      <div class="section-title" style="margin-bottom:18px;">Customer Portal</div>
+      <div class="auth-tabs">
+        <button class="btn btn-primary auth-tab-btn active" data-tab="login">Log In</button>
+        <button class="btn btn-outline auth-tab-btn" data-tab="register">Register</button>
+      </div>
+      <div id="auth-login">
+        <form id="auth-login-form">
+          <div class="form-group"><label>Email Address</label><input id="login-email" type="email" placeholder="you@email.com" required autocomplete="email" /></div>
+          <button type="submit" class="btn btn-gold" style="width:100%;margin-top:16px;">Log In</button>
+        </form>
+        <p class="text-muted text-sm" style="margin-top:14px;text-align:center;">No password needed — just your registered email.</p>
+      </div>
+      <div id="auth-register" style="display:none;">
+        <form id="auth-register-form">
+          <div class="form-grid single">
+            <div class="form-group"><label>Full Name</label><input id="reg-name" type="text" placeholder="Juan dela Cruz" required autocomplete="name" /></div>
+            <div class="form-group"><label>Email</label><input id="reg-email" type="email" placeholder="you@email.com" required autocomplete="email" /></div>
+            <div class="form-group"><label>Phone Number</label><input id="reg-phone" type="tel" placeholder="09XXXXXXXXX" required autocomplete="tel" /></div>
+          </div>
+          <button type="submit" class="btn btn-gold" style="width:100%;margin-top:16px;">Create Account</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PAGE: CUSTOMER HOME ══ -->
+<div id="page-customer-home" class="page">
+  <div class="container">
+    <div class="flex-between">
+      <div><div class="section-title">My Bookings</div><div class="section-sub">Your current and past tickets.</div></div>
+      <button class="btn btn-gold" id="btn-book-tickets">+ Book Tickets</button>
+    </div>
+    <div class="mobile-cards">
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Booking ID</th><th>Movie</th><th>Show</th><th>Seat</th><th>Payment</th><th>Ticket ID</th></tr></thead>
+          <tbody id="my-bookings-list"><tr><td colspan="6" class="text-muted">Log in to view bookings.</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PAGE: BOOKING WIZARD ══ -->
+<div id="page-book" class="page">
+  <div class="container">
+    <div class="section-title">Book Tickets</div>
+    <div class="steps">
+      <div class="step active"><div class="step-num">1</div><span class="step-label">Screening</span></div>
+      <div class="step-line"></div>
+      <div class="step"><div class="step-num">2</div><span class="step-label">Seats</span></div>
+      <div class="step-line"></div>
+      <div class="step"><div class="step-num">3</div><span class="step-label">Payment</span></div>
+      <div class="step-line"></div>
+      <div class="step"><div class="step-num">4</div><span class="step-label">Confirm</span></div>
+    </div>
+    <div id="wizard-step-1">
+      <div class="card">
+        <p class="text-muted text-sm mb-4">Select a movie screening to continue.</p>
+        <div id="screening-list" style="display:flex;flex-direction:column;gap:10px;"></div>
+        <div id="selected-screening-label" class="text-gold" style="margin-top:14px;font-size:0.9rem;font-weight:600;"></div>
+        <div class="wizard-nav" style="margin-top:18px;">
+          <button class="btn btn-gold" id="btn-go-seats">Next: Choose Seats</button>
+        </div>
+      </div>
+    </div>
+    <div id="wizard-step-2" style="display:none;">
+      <div class="card">
+        <div id="seat-area"></div>
+        <div id="seat-selection-summary" class="text-muted text-sm" style="margin:10px 0;">No seats selected</div>
+        <div class="wizard-nav">
+          <button class="btn btn-outline" id="btn-wizard-back-1">Back</button>
+          <button class="btn btn-gold" id="btn-go-payment">Next: Payment</button>
+        </div>
+      </div>
+    </div>
+    <div id="wizard-step-3" style="display:none;">
+      <div class="card">
+        <div id="payment-summary" class="text-muted text-sm mb-4" style="padding:14px;background:var(--paper-gray);border-radius:8px;line-height:1.9;"></div>
+        <p class="text-sm" style="margin-bottom:12px;font-weight:600;">Select payment method:</p>
+        <div class="payment-grid">
+          <div class="payment-option card" style="text-align:center;padding:16px;" data-method="GCash">GCash</div>
+          <div class="payment-option card" style="text-align:center;padding:16px;" data-method="Maya">Maya</div>
+          <div class="payment-option card" style="text-align:center;padding:16px;" data-method="Cash">Cash</div>
+        </div>
+        <div class="wizard-nav">
+          <button class="btn btn-outline" id="btn-wizard-back-2">Back</button>
+          <button class="btn btn-gold" id="btn-go-confirm">Review Booking</button>
+        </div>
+      </div>
+    </div>
+    <div id="wizard-step-4" style="display:none;">
+      <div class="card" style="max-width:480px;">
+        <div class="modal-title" style="margin-bottom:18px;">Confirm Your Booking</div>
+        <div id="confirm-details" style="display:flex;flex-direction:column;gap:6px;"></div>
+        <div class="wizard-nav">
+          <button class="btn btn-outline" id="btn-wizard-back-3">Back</button>
+          <button class="btn btn-gold" id="btn-confirm-booking">Confirm and Pay</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PAGE: ADMIN LOGIN ══ -->
+<div id="page-admin-login" class="page">
+  <div class="container" style="max-width:380px;">
+    <div class="card">
+      <div class="section-title" style="margin-bottom:6px;">Admin Access</div>
+      <p class="text-muted text-sm" style="margin-bottom:20px;">Enter the admin password to continue.</p>
+      <form id="admin-login-form">
+        <div class="form-group"><label>Password</label><input id="admin-password" type="password" placeholder="Password" required autocomplete="current-password" /></div>
+        <p class="text-muted text-sm" style="margin-top:10px;text-align:center;">Password: <strong>admin123</strong></p>
+        <button type="submit" class="btn btn-primary" style="width:100%;margin-top:16px;">Log In as Admin</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PAGE: ADMIN DASHBOARD ══ -->
+<div id="page-admin" class="page">
+  <div class="container">
+    <div class="section-title">Admin Dashboard</div>
+    <div class="section-sub">Manage movies, screenings, seats, bookings, and customers.</div>
+    <div class="admin-tabs">
+      <button class="btn btn-primary admin-tab-btn active" data-tab="bookings">Bookings</button>
+      <button class="btn btn-outline admin-tab-btn" data-tab="movies">Movies</button>
+      <button class="btn btn-outline admin-tab-btn" data-tab="screenings">Screenings</button>
+      <button class="btn btn-outline admin-tab-btn" data-tab="seats">Seats</button>
+      <button class="btn btn-outline admin-tab-btn" data-tab="customers">Customers</button>
+    </div>
+    <div id="admin-tab-bookings" class="admin-tab-content">
+      <div class="mobile-cards"><div class="table-wrap">
+        <table><thead><tr><th>Booking ID</th><th>Date</th><th>Customer</th><th>Movie</th><th>Show</th><th>Seat</th><th>Payment</th><th>Action</th></tr></thead>
+        <tbody id="admin-bookings-list"><tr><td colspan="8" class="text-muted">Loading…</td></tr></tbody></table>
+      </div></div>
+    </div>
+    <div id="admin-tab-movies" class="admin-tab-content" style="display:none;">
+      <div class="flex-between"><div></div><button class="btn btn-gold" id="btn-add-movie">+ Add Movie</button></div>
+      <div class="mobile-cards"><div class="table-wrap">
+        <table><thead><tr><th>ID</th><th>Title</th><th>Genre</th><th>Duration</th><th>Rating</th><th>Description</th><th>Actions</th></tr></thead>
+        <tbody id="admin-movies-list"><tr><td colspan="7" class="text-muted">Loading…</td></tr></tbody></table>
+      </div></div>
+    </div>
+    <div id="admin-tab-screenings" class="admin-tab-content" style="display:none;">
+      <div class="flex-between"><div></div><button class="btn btn-gold" id="btn-add-screening">+ Add Screening</button></div>
+      <div class="mobile-cards"><div class="table-wrap">
+        <table><thead><tr><th>ID</th><th>Movie</th><th>Theater</th><th>Date</th><th>Time</th><th>Actions</th></tr></thead>
+        <tbody id="admin-screenings-list"><tr><td colspan="6" class="text-muted">Loading…</td></tr></tbody></table>
+      </div></div>
+    </div>
+    <div id="admin-tab-seats" class="admin-tab-content" style="display:none;">
+      <div class="card" style="margin-bottom:20px;">
+        <p class="text-sm text-muted mb-4">Manage seats per theater.</p>
+        <div class="hall-btns">
+          <button class="btn btn-outline" id="seat-hall-btn-1">Hall 1</button>
+          <button class="btn btn-outline" id="seat-hall-btn-2">Hall 2</button>
+          <button class="btn btn-outline" id="seat-hall-btn-3">Hall 3</button>
+        </div>
+        <div id="seat-admin-panel" class="text-muted text-sm">Select a hall to manage its seats.</div>
+      </div>
+    </div>
+    <div id="admin-tab-customers" class="admin-tab-content" style="display:none;">
+      <div class="mobile-cards"><div class="table-wrap">
+        <table><thead><tr><th>ID</th><th>Name</th><th>Email</th><th>Phone</th><th>Actions</th></tr></thead>
+        <tbody id="admin-customers-list"><tr><td colspan="5" class="text-muted">Loading…</td></tr></tbody></table>
+      </div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ MODALS ══ -->
+<div id="modal-movie" class="modal-overlay">
+  <div class="modal">
+    <div class="modal-header">
+      <div id="movie-modal-title" class="modal-title">Add Movie</div>
+      <button class="modal-close" data-close-modal="modal-movie">&#x2715;</button>
+    </div>
+    <form id="movie-form">
+      <input type="hidden" id="movie-edit-id" />
+      <div class="form-grid">
+        <div class="form-group full"><label>Movie Title</label><input id="m-title" type="text" placeholder="e.g. Avengers: Doomsday" required /></div>
+        <div class="form-group"><label>Genre</label><input id="m-genre" type="text" placeholder="e.g. Action, Drama" required /></div>
+        <div class="form-group"><label>Duration</label><input id="m-duration" type="text" placeholder="e.g. 2h 30m" required /></div>
+        <div class="form-group full"><label>Rating</label>
+          <select id="m-rating" required><option value="">Select…</option><option>G</option><option>PG</option><option>PG-13</option><option>R</option><option>NC-17</option></select>
+        </div>
+        <div class="form-group full"><label>Description</label><textarea id="m-desc" placeholder="Short synopsis…"></textarea></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline" data-close-modal="modal-movie">Cancel</button>
+        <button type="submit" class="btn btn-gold">Save Movie</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div id="modal-screening" class="modal-overlay">
+  <div class="modal">
+    <div class="modal-header">
+      <div id="screening-modal-title" class="modal-title">Add Screening</div>
+      <button class="modal-close" data-close-modal="modal-screening">&#x2715;</button>
+    </div>
+    <form id="screening-form">
+      <input type="hidden" id="screening-edit-id" />
+      <div class="form-grid">
+        <div class="form-group full"><label>Movie</label><select id="s-movie-id" required><option value="">Select movie…</option></select></div>
+        <div class="form-group full"><label>Theater</label>
+          <select id="s-theater" required><option value="">Select…</option><option>Hall 1</option><option>Hall 2</option><option>Hall 3</option></select>
+        </div>
+        <div class="form-group"><label>Show Date</label><input id="s-date" type="date" required /></div>
+        <div class="form-group"><label>Show Time</label><input id="s-time" type="time" required /></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline" data-close-modal="modal-screening">Cancel</button>
+        <button type="submit" class="btn btn-gold">Save Screening</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div id="modal-customer" class="modal-overlay">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">Edit Customer</div>
+      <button class="modal-close" data-close-modal="modal-customer">&#x2715;</button>
+    </div>
+    <form id="customer-form">
+      <input type="hidden" id="c-edit-id" />
+      <div class="form-grid single">
+        <div class="form-group"><label>Full Name</label><input id="c-name" type="text" required /></div>
+        <div class="form-group"><label>Email</label><input id="c-email" type="email" required /></div>
+        <div class="form-group"><label>Phone</label><input id="c-phone" type="tel" required /></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline" data-close-modal="modal-customer">Cancel</button>
+        <button type="submit" class="btn btn-gold">Save Changes</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script type="module" src="main.js"></script>
+</body>
+</html>
